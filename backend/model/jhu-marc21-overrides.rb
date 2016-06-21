@@ -23,7 +23,7 @@ def self.assemble_controlfield_string(obj)
   string += date['begin'] ? date['begin'][0..3] : "    "
   string += date['end'] ? date['end'][0..3] : "    "
   string += "mdu"
-  18.times { string += ' ' }
+  17.times { string += ' ' }
   string += (obj.language || '|||')
   string += ' d'
 
@@ -44,23 +44,27 @@ end
   end
 
 #20160621LJD: Change date from 245$f to 264$c per technical services.
-  def handle_dates(dates)
-    return false if dates.empty?
+def handle_dates(dates)
+  return false if dates.empty?
 
-    dates.each do |date|
-      
-      val = nil
-      if date['expression']
-        val = date['expression']
-      elsif date['date_type'] == 'single'
-        val = date['begin']
-      else
-        val = "#{date['begin']} - #{date['end']}"
-      end
+  dates = [["single", "inclusive", "range"], ["bulk"]].map {|types|
+    dates.find {|date| types.include? date['date_type'] }
+  }.compact
 
-      df('264', ' ', '0').with_sfs(['c', val])
+  dates.each do |date|
+    code = 'c'
+    val = nil
+    if date['expression'] && date['date_type'] != 'bulk'
+      val = date['expression']
+    elsif date['date_type'] == 'single'
+      val = date['begin']
+    else
+      val = "#{date['begin']} - #{date['end']}"
     end
+
+    df('264', ' ', '0').with_sfs([code, val])
   end
+end
 
 #20160620LJD: Prefercite incorrectly mapped to 534; changed to 524
   def handle_notes(notes)
