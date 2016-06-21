@@ -73,11 +73,30 @@ end
 
     notes.each do |note|
 
+      prefix =  case note['type']
+                when 'dimensions'; "Dimensions"
+                when 'physdesc'; "Physical Description note"
+                when 'materialspec'; "Material Specific Details"
+                when 'physloc'; "Location of resource"
+                when 'phystech'; "Physical Characteristics / Technical Requirements"
+                when 'physfacet'; "Physical Facet"
+                when 'processinfo'; "Processing Information"
+                when 'separatedmaterial'; "Materials Separated from the Resource"
+                else; nil
+                end
+
       marc_args = case note['type']
 
                   when 'prefercite'
                     ['524', '8', ' ', 'a']
                   end
+
+      unless marc_args.nil?
+        text = prefix ? "#{prefix}: " : ""
+        text += ASpaceExport::Utils.extract_note_text(note)
+        df!(*marc_args[0...-1]).with_sfs([marc_args.last, *Array(text)])
+      end
+
     end
   end
 
