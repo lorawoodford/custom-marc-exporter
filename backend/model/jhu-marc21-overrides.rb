@@ -54,8 +54,10 @@ def handle_dates(dates)
   dates.each do |date|
     code = 'c'
     val = nil
-    if date['expression'] && date['date_type'] != 'bulk'
-      val = date['expression']
+    if date['date_type'] == 'bulk'
+      val = nil
+    elsif date['expression']
+        val = date['expression']
     elsif date['date_type'] == 'single'
       val = date['begin']
     else
