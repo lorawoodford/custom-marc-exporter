@@ -47,7 +47,7 @@ This is not currently present (but was present in AT outputs). If we want this i
 
 ## To install:
 
-	1. Stop the application
-	2. Clone plugin into the archivesspace/plugins directory
-	3. Modify config.rb (in archivesspace/config) to list jhu-marc-exporter
-	4. Restart the application /archivesspace/archivesspace.sh
+1. Stop the application
+2. Clone plugin into the archivesspace/plugins directory
+3. Modify config.rb (in archivesspace/config) to list jhu-marc-exporter
+4. Restart the application /archivesspace/archivesspace.sh
