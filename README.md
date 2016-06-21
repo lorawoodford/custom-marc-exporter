@@ -1,15 +1,21 @@
 # jhu-marc-exporter
-JHU MARC exporter modifications
+
+## To install:
+
+Stop the application
+Clone plugin into the archivesspace/plugins directory
+Modify config.rb (in archivesspace/config) to list jhu-marc-exporter
+Restart the application /archivesspace/archivesspace.sh
 
 Enables following customizations to MARC exporter per Chris' email and meeting of 6/20/2016:
 
 ## ArchivesSpace MARCXML Output Issues
-Below are listed the issues with the current ArchivesSpace MARCXML outputs. All of these are relatively minor and if fixing them would be a major hassle, it’s probably not worth it, with one exception, that being the 040. Currently the 040 field is opened with an XML tag, but is not closed, so whatever comes after it, in this case the 245 field, is mapped to the 040 instead (basically, the collection title is being mapped to a place where it really should not go). As far as the rest of the record, I am modelling my MARC records for archival materials on several presentations given my Corey Nimer (models which appear to reflect best practices of the community). 
+Below are listed the issues with the current ArchivesSpace MARCXML outputs. All of these are relatively minor and if fixing them would be a major hassle, it’s probably not worth it, with one exception, that being the 040. Currently the 040 field is opened with an XML tag, but is not closed, so whatever comes after it, in this case the 245 field, is mapped to the 040 instead (basically, the collection title is being mapped to a place where it really should not go). As far as the rest of the record, I am modelling my MARC records for archival materials on several presentations given my Corey Nimer (models which appear to reflect best practices of the community).
 
-## 008/15-17 (Country Code): 
+## 008/15-17 (Country Code):
 Currently defined in output as “xx”=Unknown. Should be the location of the repository. Define as “mdu”=Maryland.
 
-## Leader/18 (Descriptive Cataloging Form): 
+## Leader/18 (Descriptive Cataloging Form):
 Currently defined as “u”=Unknown. Should be “i”=ISBD punctuation is used.
 
 ## 040 (Cataloging Source):
@@ -43,4 +49,3 @@ This is not currently present (but was present in AT outputs). If we want this i
 <datafield tag=”524” ind2=” “ ind1=” “>
 	<subfield code=”a”>[Name of folder or item], [Date], [Box number], [Folder number], [Collection title], [Collection number], Special Collections, The Johns Hopkins University</subfield>
 </datafield>
-
