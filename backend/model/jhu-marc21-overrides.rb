@@ -35,10 +35,9 @@ end
     repo = repository['_resolved']
     return false unless repo
 
-    sfa = repo['org_code'] ? repo['org_code'] : "Repository: #{repo['repo_code']}"
-    df('852', ' ', ' ', ' ').with_sfs(
+    df('852', ' ', ' ').with_sfs(
                         ['a', 'The Johns Hopkins University'],
-                        ['b', repo['name'],
+                        ['b', repo['name']],
                         ['e', '3400 N. Charles St. Baltimore, MD 21218']
                       )
     df('040', ' ', ' ').with_sfs(['a', 'JHE'], ['b', 'eng'], ['c', 'JHE'])
@@ -49,7 +48,7 @@ end
     return false if dates.empty?
 
     dates.each do |date|
-      code = 'c'
+      
       val = nil
       if date['expression']
         val = date['expression']
@@ -59,7 +58,7 @@ end
         val = "#{date['begin']} - #{date['end']}"
       end
 
-      df('264', '1', '0').with_sfs([code, val])
+      df('264', ' ', '0').with_sfs(['c', val])
     end
   end
 
