@@ -30,7 +30,7 @@ def self.assemble_controlfield_string(obj)
   string
 end
 
-#20160620LJD: 040 - Hard code psels (Susquehanna University) for 040 $a $e per technical services; add 'eng' to subfield b.  Add repository address.
+#20160620LJW: 040 - Hard code psels (Susquehanna University) for 040 $a $e per technical services; add 'eng' to subfield b.  Add repository address.
   def handle_repo_code(repository)
     repo = repository['_resolved']
     return false unless repo
@@ -43,7 +43,7 @@ end
     df('040', ' ', ' ').with_sfs(['a', 'psels'], ['b', 'eng'], ['c', 'psels'])
   end
 
-#20160621LJD: Change date from 245$f to 264$c:
+#20160621LJW: Change date from 245$f to 264$c:
 def handle_dates(dates)
   return false if dates.empty?
 
@@ -66,4 +66,6 @@ def handle_dates(dates)
 
     df('264', ' ', '0').with_sfs([code, val])
   end
+end
+
 end
